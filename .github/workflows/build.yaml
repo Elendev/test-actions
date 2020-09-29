@@ -1,0 +1,11 @@
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    build_job:
+        name: build
+        runs-on: ubuntu-20.04
+        steps:
+            - run: echo "It's working"
