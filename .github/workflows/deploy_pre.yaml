@@ -12,4 +12,9 @@ jobs:
         name: generate MEP ticket
         runs-on: ubuntu-20.04
         steps:
-            - run: echo "Generate ticket"
+            - uses: JasonEtco/create-an-issue@v2
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                ADJECTIVE: great
+              with:
+                filename: .github/release-ticket.md
