@@ -1,0 +1,15 @@
+on:
+    release:
+        types: [published]
+
+jobs:
+    release_job:
+        name: realease preprod
+        runs-on: ubuntu-20.04
+        steps:
+            - run: echo "Releasing in preprod"
+    generate_ticket:
+        name: generate MEP ticket
+        runs-on: ubuntu-20.04
+        steps:
+            - run: echo "Generate ticket"
