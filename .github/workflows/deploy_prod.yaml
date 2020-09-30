@@ -4,7 +4,7 @@ on:
 
 jobs:
     release_prod:
-        name: realease preprod
+        name: realease prod
         runs-on: ubuntu-20.04
         steps:
             - run: echo "Releasing in production"
