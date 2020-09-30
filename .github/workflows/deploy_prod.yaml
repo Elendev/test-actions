@@ -9,4 +9,8 @@ jobs:
         runs-on: ubuntu-20.04
         steps:
             - run: echo "Releasing in production"
-            - run: echo "Close issue"
+            - name: Close Issue
+              uses: peter-evans/close-issue@v1
+              with:
+                comment: |
+                  Deployment done, auto-close the issue
