@@ -12,6 +12,7 @@ jobs:
         name: generate MEP ticket
         runs-on: ubuntu-20.04
         steps:
+            - uses: actions/checkout@v2
             - uses: JasonEtco/create-an-issue@v2
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
