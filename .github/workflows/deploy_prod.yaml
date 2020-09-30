@@ -1,0 +1,12 @@
+on:
+    label:
+        types: [created, edited]
+
+jobs:
+    release_prod:
+        name: realease preprod
+        runs-on: ubuntu-20.04
+        steps:
+            - run: echo "Releasing in production"
+            - run: echo "Close issue"
+        if: github.event.label.name == 'to-deploy'
