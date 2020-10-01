@@ -9,7 +9,7 @@ jobs:
         runs-on: ubuntu-20.04
         steps:
             - run: echo "Releasing in production"
-            - name: Comment progress on issue ${{ github.issue.id }}
+            - name: Comment progress on issue ${{ github.issue.id }} ${{ github.number }} ${{ github.event.issue }}
               uses: peter-evans/create-or-update-comment@v1
               with:
                 issue-number: ${{ github.issue.id }}
