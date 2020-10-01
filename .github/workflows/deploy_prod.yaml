@@ -9,6 +9,12 @@ jobs:
         runs-on: ubuntu-20.04
         steps:
             - run: echo "Releasing in production"
+            - name: Comment progress
+              uses: peter-evans/create-or-update-comment@v1
+              with:
+                issue_number: ${{ github.event.issue.id }}
+                body: |
+                This is my comment, currently releasing verion ${{ GITHUB_ACTION }}
             - name: Close Issue
               uses: peter-evans/close-issue@v1
               with:
