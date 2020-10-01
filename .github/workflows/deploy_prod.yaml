@@ -15,6 +15,7 @@ jobs:
                 issue_number: ${{ github.event.issue.id }}
                 body: |
                 This is my comment, currently releasing verion ${{ GITHUB_ACTION }}
+                
             - name: Close Issue
               uses: peter-evans/close-issue@v1
               with:
