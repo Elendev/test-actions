@@ -12,7 +12,7 @@ jobs:
             - name: Comment progress
               uses: peter-evans/create-or-update-comment@v1
               with:
-                issue_number: ${{ github.event.issue.id }}
+                issue-number: ${{ github.event.issue.id }}
                 body: |
                   This is my comment, currently releasing version ${{ env.GITHUB_ACTION }}
 
