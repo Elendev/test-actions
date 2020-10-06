@@ -7,9 +7,15 @@ jobs:
         name: build artifact
         runs-on: ubuntu-20.04
         steps:
-            - uses: actions/checkout@v2
-            - run: zip -r artifact.zip . -x \*.git\* \*\*/node_modules/\*
-            - uses: actions/upload-release-asset@v1
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Build artifact
+              run: zip -r artifact.zip . -x \*.git\* \*\*/node_modules/\*
+
+            - name: Upload release to release
+              id: upload_release
+              uses: actions/upload-release-asset@v1
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
@@ -18,20 +24,13 @@ jobs:
                 asset_name: artifact.zip
                 asset_content_type: application/zip
 
-    release_job:
-        name: realease preprod
-        runs-on: ubuntu-20.04
-        steps:
-            - run: echo "Releasing in preprod"
+            - name: Realease in preprod
+              run: echo "Releasing in preprod"
 
-    generate_ticket:
-        name: generate MEP ticket
-        runs-on: ubuntu-20.04
-        steps:
-            - uses: actions/checkout@v2
-            - uses: JasonEtco/create-an-issue@v2
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                ADJECTIVE: great
-              with:
-                filename: .github/release-ticket.md
+            - name: Create MEP issue
+              uses: JasonEtco/create-an-issue@v2
+                env:
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                    ARTIFACT: ${{ steps.upload_release.outputs.browser_download_url }}
+                with:
+                    filename: .github/release-ticket.md
