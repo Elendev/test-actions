@@ -8,10 +8,8 @@ jobs:
         name: realease prod
         runs-on: ubuntu-20.04
         steps:
-            - id: release_name
+            - id: release_infos
               run: echo "::set-output name=version::$(echo '${{ github.event.issue.title }}' | grep -o '[^ ]*$' | grep -o '[^/]*$')"
-
-            - id: release_url
               run: echo "::set-output name=url::$(echo '${{ github.event.issue.body }}' | grep URL | grep -o '[^ ]*$')"
 
             - name: Comment progress on issue ${{ github.event.issue.number }}
@@ -19,7 +17,7 @@ jobs:
               with:
                 issue-number: ${{ github.event.issue.number }}
                 body: |
-                  This is my comment, currently releasing version ${{ steps.release_name.outputs.version }} with URL ${{ steps.release_url.outputs.url }}
+                  This is my comment, currently releasing version ${{ steps.release_infos.outputs.version }} with URL ${{ steps.release_infos.outputs.url }}
 
             - run: echo "Releasing in production"
 
