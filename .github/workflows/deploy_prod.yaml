@@ -8,13 +8,20 @@ jobs:
         name: realease prod
         runs-on: ubuntu-20.04
         steps:
+            - id: release_name
+              run: echo "::set-output name=version::$(${{ github.event.issue.title }} | grep -o '[^ ]*$' | grep -o '[^/]*$')"
+
+            - id: release_url
+              run: echo "::set-output name=url::$(${{ github.event.issue.body }} | grep URL | grep -o '[^ ]*$')"
+
             - run: echo "Releasing in production"
+
             - name: Comment progress on issue ${{ github.event.issue.number }}
               uses: peter-evans/create-or-update-comment@v1
               with:
                 issue-number: ${{ github.event.issue.number }}
                 body: |
-                  This is my comment, currently releasing version ${{ github.event.issue.title }}
+                  This is my comment, currently releasing version ${{ steps.release_name.outputs.version }} with URL ${{ steps.release_url.outputs.url }}
 
             - name: Close Issue
               uses: peter-evans/close-issue@v1
