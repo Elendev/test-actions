@@ -3,11 +3,30 @@ on:
         types: [published]
 
 jobs:
+    build_artifact:
+        name: build artifact
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v2
+            - run: zip -r artifact.zip . -x \*.git\* \*\*/node_modules/\*
+
+    add_artifact_to_release:
+        name: Add artifact to release
+        uses: actions/upload-release-asset@v1
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+            upload_url: ${{ github.event.release.upload_url }}
+            asset_path: ./artifact.zip
+            asset_name: artifact.zip
+            asset_content_type: application/zip
+
     release_job:
         name: realease preprod
         runs-on: ubuntu-20.04
         steps:
             - run: echo "Releasing in preprod"
+            
     generate_ticket:
         name: generate MEP ticket
         runs-on: ubuntu-20.04
