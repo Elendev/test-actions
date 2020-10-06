@@ -29,8 +29,8 @@ jobs:
 
             - name: Create MEP issue
               uses: JasonEtco/create-an-issue@v2
-                env:
-                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                    ARTIFACT: ${{ steps.upload_release.outputs.browser_download_url }}
-                with:
-                    filename: .github/release-ticket.md
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                ARTIFACT: ${{ steps.upload_release.outputs.browser_download_url }}
+              with:
+                filename: .github/release-ticket.md
