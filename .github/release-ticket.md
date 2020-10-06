@@ -1,5 +1,5 @@
 ---
-title: Mep Release {{ env.GITHUB_REF }}
+title: MEP {{ env.GITHUB_REF }}
 assignees: Elendev
 labels: awaiting-review
 ---
